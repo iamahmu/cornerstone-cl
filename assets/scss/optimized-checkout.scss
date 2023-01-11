@@ -15,6 +15,113 @@
 // Background, Logo Position
 // -----------------------------------------------------------------------------
 
+// Custom Fonts
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../fonts/MaisonNeue-Book.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: normal;
+    font-style: italic;
+    src: url('../fonts/MaisonNeue-BookItalic.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../fonts/MaisonNeue-Bold.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue Bold';
+    font-weight: bold;
+    font-style: italic;
+    src: url('../fonts/MaisonNeue-BoldItalic.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: 500;
+    font-style: normal;
+    src: url('../fonts/MaisonNeue-Medium.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: 500;
+    font-style: italic;
+    src: url('../fonts/MaisonNeue-MediumItalic.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: 600;
+    font-style: normal;
+    src: url('../fonts/MaisonNeue-Demi.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: 600;
+    font-style: italic;
+    src: url('../fonts/MaisonNeue-DemiItalic.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: 300;
+    font-style: normal;
+    src: url('../fonts/MaisonNeue-Light.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue';
+    font-weight: 300;
+    font-style: italic;
+    src: url('../fonts/MaisonNeue-LightItalic.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue Extended';
+    font-weight: 600;
+    font-style: normal;
+    src: url('../fonts/MaisonNeueExtendedWEB-Demi.woff2') format('woff2'),
+      url('../fonts/MaisonNeueExtendedWEB-Demi.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue Extended';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../fonts/MaisonNeueExtendedWEB-Bold.woff2') format('woff2'),
+      url('../fonts/MaisonNeueExtendedWEB-Bold.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Maison Neue Extended';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../fonts/MaisonNeueExtendedWEB-Book.woff2') format('woff2'),
+        url('../fonts/MaisonNeueExtendedWEB-Book.woff') format('woff');
+}
+  
+@font-face {
+    font-family: 'Ogg-text';
+    font-weight: bold;
+    src: url('../fonts/OggText-Bold.woff2') format('woff2');
+}
+  
+  
+:root {
+--second-extended-font-family: 'Ogg-text';
+}
+  
+
 *:focus {
     outline-color: stencilColor("optimizedCheckout-colorFocus");
 }
@@ -35,6 +142,11 @@
     @media (min-width: 801px) {
         text-align: stencilString("optimizedCheckout-logo-position");
     }
+    @media (max-width: 801px) {
+        .checkoutHeader-content-right {
+            visibility: hidden;
+        }
+    }
 }
 
 //
@@ -48,6 +160,10 @@
     color: stencilColor("optimizedCheckout-headingPrimary-color");
     font-family: stencilFontFamily("optimizedCheckout-headingPrimary-font"), Arial, Helvetica, sans-serif;
     font-weight: stencilFontWeight("optimizedCheckout-headingPrimary-font");
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: 0px;
+
 }
 
 .optimizedCheckout-headingSecondary {
@@ -82,6 +198,10 @@ body {
     color: stencilColor("optimizedCheckout-contentPrimary-color");
     font-family: stencilFontFamily("optimizedCheckout-contentPrimary-font"), Arial, Helvetica, sans-serif;
     font-weight: stencilFontWeight("optimizedCheckout-contentPrimary-font");
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0px;
+
 }
 
 .optimizedCheckout-contentSecondary {
@@ -102,6 +222,8 @@ body {
     color: stencilColor("optimizedCheckout-buttonPrimary-color");
     font-family: stencilFontFamily("optimizedCheckout-buttonPrimary-font"), Arial, Helvetica, sans-serif;
     font-weight: stencilFontWeight("optimizedCheckout-buttonPrimary-font");
+    border-radius: 0px;
+    text-transform: capitalize;
 
     &:focus,
     &:hover {
@@ -145,6 +267,8 @@ body {
     color: stencilColor("optimizedCheckout-buttonSecondary-color");
     font-family: stencilFontFamily("optimizedCheckout-buttonSecondary-font"), Arial, Helvetica, sans-serif;
     font-weight: stencilFontWeight("optimizedCheckout-buttonSecondary-font");
+    border-radius: 0px;
+    text-transform: capitalize;
 
     &:focus,
     &:hover {
@@ -201,6 +325,10 @@ a {
     background-color: stencilColor("optimizedCheckout-orderSummary-backgroundColor");
     border-color: stencilColor("optimizedCheckout-orderSummary-borderColor");
     box-shadow: 0 4px 8px transparentize(stencilColor("optimizedCheckout-orderSummary-borderColor"), 0.5);
+    @media (min-width: 968px) {
+        padding: 0px 24px;
+    }
+    border-radius: 0px;
 }
 
 .optimizedCheckout-orderSummary-cartSection {
@@ -222,10 +350,14 @@ a {
 
     &::before {
         color: stencilColor("optimizedCheckout-step-textColor");
+        font-family: "Maison Neue Extended", Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        font-size: 16px;
     }
 
     svg {
         fill: stencilColor("optimizedCheckout-step-textColor");
+        padding: 0.4rem
     }
 }
 
@@ -252,7 +384,7 @@ a {
 // -----------------------------------------------------------------------------
 
 $optimizedCheckout-input-boxShadow: inset 0 1px 1px stencilColor("optimizedCheckout-formField-shadowColor");
-$optimizedCheckout-input--focus-boxShadow: 0 0 3px transparentize(stencilColor("optimizedCheckout-colorFocus"), 0.4);
+$optimizedCheckout-input--focus-boxShadow: 0 0 0px transparentize(stencilColor("optimizedCheckout-colorFocus"), 0.4);
 $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("optimizedCheckout-formField-errorColor"), 0.4);
 
 .optimizedCheckout-form-input,
@@ -261,6 +393,7 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("
     border-color: stencilColor("optimizedCheckout-formField-borderColor");
     box-shadow: $optimizedCheckout-input-boxShadow;
     color: stencilColor("optimizedCheckout-formField-textColor");
+    border-radius: 0px;
 
     &::placeholder {
         color: stencilColor("optimizedCheckout-formField-placeholderColor");
@@ -288,6 +421,7 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("
         border-color: stencilColor("optimizedCheckout-formField-borderColor");
         box-shadow: $optimizedCheckout-input-boxShadow;
         opacity: 1;
+        border-radius: 0px;
     }
 
     .optimizedCheckout-form-radio:checked + &,
@@ -320,6 +454,8 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("
     color: stencilColor("optimizedCheckout-discountBanner-textColor");
     font-family: stencilFontFamily("optimizedCheckout-link-font"), Arial, Helvetica, sans-serif;
     font-weight: stencilFontWeight("optimizedCheckout-link-font");
+    border: 1px solid stencilColor("optimizedCheckout-orderSummary-borderColor");
+    border-radius: 0px !important;
 
     svg {
         fill: stencilColor("optimizedCheckout-discountBanner-iconColor");
@@ -379,3 +515,195 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("
     background-color: stencilColor("optimizedCheckout-loadingToaster-backgroundColor");
     color: stencilColor("optimizedCheckout-loadingToaster-textColor");
 }
+
+// Custom Styling
+.checkoutHeader-content {
+    .checkoutHeader-content-left {
+        display: inline-block;
+    }
+    .checkoutHeader-content-right {
+        float: right;
+        padding-top: 1rem;
+    }
+}
+.checkoutHeader {
+    height: 96px;
+}
+
+#logoImage {
+    width: 170px;
+}
+
+.layout.optimizedCheckout-contentPrimary {
+    > div {
+        display: flex;
+    }
+}
+
+.layout-main {
+    #checkout-customer-guest {
+        a {
+            border-bottom: 1px solid stencilColor("optimizedCheckout-link-color");
+            font-family: stencilFontFamily("optimizedCheckout-headingPrimary-font"), Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 12px;
+            letter-spacing: 0px;
+        }
+        a:hover {
+            border-bottom-color: stencilColor("optimizedCheckout-link-hoverColor");
+        }
+    }
+    .customerEmail-container {
+        .form-label::before {
+            border-radius: 0px;
+            border-color: stencilColor("optimizedCheckout-formField-inputControlColor");    
+        }
+
+        .form-checkbox:checked {
+            +.form-label::before {
+                background-color: stencilColor("optimizedCheckout-buttonPrimary-backgroundColor");
+                box-shadow: none;
+            }
+            
+        }
+    }
+    .checkout-step--customer {
+        .optimizedCheckout-form-label {
+            color: #5A5A5A;
+        }
+    }
+}
+
+.layout-cart {
+    padding: 0px;
+    float: none;
+    width: 100%;
+    max-width: 400px;
+    position: sticky;
+    top: 0;
+    height: fit-content;
+
+    a {
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 25px;
+        letter-spacing: 0px;
+        text-align: center;
+
+    }
+
+    .cart {
+        margin: 1.5rem 0 1.5rem;
+    }
+
+    .cart-section {
+        border-top: 1px solid stencilColor("optimizedCheckout-header-borderColor");
+        padding: 1.5rem 0;
+    }
+
+    .cart-header {
+        padding: 1.5rem 0;
+    }
+
+    .cart-title {
+        &::before {
+            content : ' ';
+            display: block;
+            // background-image: url(../../assets/icons/cart.svg);
+            background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='3' y='7' width='19' height='13' stroke='black' stroke-width='2'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 5.99996C15.9644 3.78466 14.1871 2 12 2C9.81285 2 8.03564 3.78467 8 5.99996H9.45664C9.49204 4.60257 10.6172 3.48082 12 3.48082C13.3828 3.48082 14.508 4.60257 14.5434 5.99996H16Z' fill='black'/%3E%3C/svg%3E%0A");
+            background-repeat: no-repeat;
+            background-size: 15px;
+            height: 15px;
+            width: 15px;
+            float: left;
+            margin-right: 8px;
+        }
+    }
+
+    .cart-header-link {
+        height: 25px;
+        width: 82px;
+        border-radius: 0px;
+        padding: 0px 16px 0px 16px;
+        background-color: stencilColor("optimizedCheckout-buttonSecondary-backgroundColor");
+        color: stencilColor("optimizedCheckout-link-color");
+        font-family: stencilFontFamily("optimizedCheckout-headingPrimary-font"), Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 25px;
+        letter-spacing: 0px;
+    }
+
+    .productList {
+        .product-price {
+            font-weight: 600;
+        }
+    }
+}
+
+.layout-cart, .ReactModalPortal {
+    .cart-priceItem--total {
+        .cart-priceItem-label, .cart-priceItem-value {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+}
+
+#redeemable-collapsable {
+    .optimizedCheckout-form-input {
+        border-right-width: 0px;
+    }
+
+    .optimizedCheckout-form-input:focus,
+    .optimizedCheckout-form-select:focus,
+    .optimizedCheckout-form-select:hover {
+        background-color: stencilColor("optimizedCheckout-formField-backgroundColor");
+        border-color: stencilColor("optimizedCheckout-colorFocus");
+        border-right-width: 0px;
+        box-shadow: $optimizedCheckout-input--focus-boxShadow, $optimizedCheckout-input-boxShadow;
+    }
+}
+
+#applyRedeemableButton {
+    margin: 0px;
+    background-color: stencilColor("optimizedCheckout-buttonPrimary-backgroundColor");
+    border-color: stencilColor("optimizedCheckout-buttonPrimary-borderColor");
+    color: stencilColor("optimizedCheckout-buttonPrimary-color");
+
+    &:focus,
+    &:hover {
+        background-color: stencilColor("optimizedCheckout-buttonPrimary-backgroundColorHover");
+        border-color: stencilColor("optimizedCheckout-buttonPrimary-borderColorHover");
+        color: stencilColor("optimizedCheckout-buttonPrimary-colorHover");
+    }
+}
+
+.cartDrawer.optimizedCheckout-orderSummary{
+    padding: 15px;
+    .cartDrawer-items {
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .cartDrawer-total {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+// .checkout-form {
+//     .form-field > label:first-child {
+//         color: #9B9B9B;
+//         position: absolute;
+//         transform-origin: top left;
+//         transform: translate(14px, 4px) scale(0.8);
+//         transition: all .1s ease-in-out;
+//     }
+//     .optimizedCheckout-form-input {
+//         border: none;
+//         padding-top: 20px;
+//         background-color: stencilColor("optimizedCheckout-discountBanner-backgroundColor");
+//     }
+// }
