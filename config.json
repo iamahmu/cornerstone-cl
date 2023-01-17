@@ -1,6 +1,6 @@
 {
-  "name": "Cornerstone CL 1.0",
-  "version": "6.8.0-CC.3",
+  "name": "Cornerstone CL 1.1",
+  "version": "6.8.0-CC.4",
   "template_engine": "handlebars_v4",
   "meta": {
     "price": 0,
@@ -406,8 +406,8 @@
         "optimizedCheckout-step-backgroundColor": "#F2F2F2",
         "optimizedCheckout-step-textColor": "#000000",
         "optimizedCheckout-buttonPrimary-backgroundColor": "#000000",
-        "optimizedCheckout-buttonPrimary-font": "Maison Neue_600",
-        "optimizedCheckout-buttonSecondary-font": "Maison Neue_600",
+        "optimizedCheckout-buttonPrimary-font": "Maison Neue Extended_600",
+        "optimizedCheckout-buttonSecondary-font": "Maison Neue Extended_600",
         "optimizedCheckout-buttonSecondary-borderColor": "#5A5A5A",
         "optimizedCheckout-formField-inputControlColor": "#000000",
         "optimizedCheckout-colorFocus": "#000000",

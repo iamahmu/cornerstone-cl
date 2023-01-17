@@ -290,6 +290,7 @@ body {
   font-weight: stencilFontWeight("optimizedCheckout-buttonSecondary-font");
   border-radius: 0px;
   text-transform: capitalize;
+  font-size: 11px;
 
   &:focus,
   &:hover {
@@ -693,6 +694,15 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
       }
     }
   }
+  .optimizedCheckout-buttonPrimary {
+    font-size: 16px;
+    padding: 0 40px;
+    height: 44px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .layout-cart {
@@ -719,6 +729,9 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
   .cart-section {
     border-top: 1px solid stencilColor("optimizedCheckout-header-borderColor");
     padding: 1.5rem 0;
+    .cart-priceItem-value {
+      font-weight: 600;
+    }
   }
 
   .cart-header {
@@ -777,6 +790,15 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
       line-height: 20px;
     }
   }
+  .cart-modal-body {
+    padding: 0px;
+    border-bottom: 1px solid
+      stencilColor("optimizedCheckout-header-borderColor");
+    .product-price,
+    .cart-priceItem-value {
+      font-weight: 600;
+    }
+  }
 }
 
 #redeemable-collapsable {
@@ -798,12 +820,23 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
 }
 
 #applyRedeemableButton {
+  &::before {
+    content: " ";
+    position: absolute;
+    left: 37%;
+    background-image: url(../icons/arrow-right.svg);
+    background-repeat: no-repeat;
+    background-size: 24px;
+    height: 16px;
+    width: 25px;
+  }
   margin: 0px;
+  color: stencilColor("optimizedCheckout-buttonPrimary-backgroundColor");
   background-color: stencilColor(
     "optimizedCheckout-buttonPrimary-backgroundColor"
   );
   border-color: stencilColor("optimizedCheckout-buttonPrimary-borderColor");
-  color: stencilColor("optimizedCheckout-buttonPrimary-color");
+  // color: stencilColor("optimizedCheckout-buttonPrimary-color");
 
   &:focus,
   &:hover {
@@ -813,7 +846,8 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
     border-color: stencilColor(
       "optimizedCheckout-buttonPrimary-borderColorHover"
     );
-    color: stencilColor("optimizedCheckout-buttonPrimary-colorHover");
+    // color: stencilColor("optimizedCheckout-buttonPrimary-colorHover");
+    color: stencilColor("optimizedCheckout-buttonPrimary-backgroundColorHover");
   }
 }
 
@@ -910,6 +944,25 @@ form.checkout-form {
 }
 
 .ReactModalPortal {
+  @media (max-width: 550px) {
+    .modal--afterOpen {
+      box-shadow: none;
+      max-width: 100%;
+      padding: 16px;
+      left: unset;
+      right: unset;
+      .cart-modal-body {
+        padding-bottom: 0px;
+        .product {
+          flex-wrap: nowrap;
+        }
+        .product-column.product-actions {
+          order: 2;
+          align-self: flex-start;
+        }
+      }
+    }
+  }
   @media (max-width: 968px) {
     .modal--afterOpen {
       justify-content: center;
