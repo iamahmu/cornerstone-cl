@@ -659,9 +659,6 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
     }
     .customerEmail-action {
       margin: 1.9rem 0 0 0;
-      .customerEmail-button {
-        padding: 1.1rem 0.5rem;
-      }
     }
   }
   .checkout-step--customer {
@@ -699,9 +696,6 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
     padding: 0 40px;
     height: 44px;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 
@@ -782,6 +776,9 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
 
 .layout-cart,
 .ReactModalPortal {
+  .cart-priceItem-label > span {
+    padding-right: 16px;
+  }
   .cart-priceItem--total {
     .cart-priceItem-label,
     .cart-priceItem-value {
@@ -798,6 +795,9 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
     .cart-priceItem-value {
       font-weight: 600;
     }
+  }
+  .product-body {
+    padding-right: 16px;
   }
 }
 
@@ -848,6 +848,14 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
     );
     // color: stencilColor("optimizedCheckout-buttonPrimary-colorHover");
     color: stencilColor("optimizedCheckout-buttonPrimary-backgroundColorHover");
+  }
+}
+#applyRedeemableButton.is-loading {
+  &::before {
+    background-image: none;
+    height: 25px;
+    width: 25px;
+    left: 0;
   }
 }
 
