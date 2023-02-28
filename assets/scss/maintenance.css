@@ -150,7 +150,7 @@ div p {
     width: 500px;
   }
   label,
-input {
+  input {
     display: inline-block;
     margin-right: 10px;
     width: auto;

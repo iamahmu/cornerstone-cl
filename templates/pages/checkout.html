@@ -4,6 +4,7 @@
 <script type="text/javascript">
   window.language = {{{langJson 'optimized_checkout'}}};
 </script>
+<script src="https://checkout-sdk.bigcommerce.com/v1/loader.js"></script>
 
 {{{head.scripts}}} {{/partial}} {{#partial "page"}}
 <header class="checkoutHeader optimizedCheckout-header">
@@ -42,6 +43,167 @@
     </span>
   </div>
 </header>
-
 {{{ checkout.checkout_content }}} {{{ footer.scripts }}} {{/partial}} {{>
 layout/empty}}
+
+<!-- <script type="module">
+  const BC_SETTINGS = {{{ json settings }}};
+  const CUSTOMER = {{{ json customer}}};
+  const redeem_login_id = 'redeem-login';
+  const {
+    storefront_api,
+    request : {
+      referer
+    }
+  } = BC_SETTINGS;
+  const redirectToCart = `${referer}cart`
+
+  const changeNavigationLink = (target) => {
+    if (target && target?.href?.includes("sandbox")) {
+      target.href = redirectToCart;
+    }
+  };
+
+  const createLPMutaionObserver = () => {
+    console.log('CUSTOMER LP Script');
+
+    const redeem_login_div = document.createElement('div');
+    redeem_login_div.id = 'redeem-login-div';
+    let redeem_login = `<p id=${redeem_login_id}>To redeem your loyalty points </p> <a data-test="customer-continue-button" id="checkout-customer-login" class="button optimizedCheckout-buttonSecondary" href=${redirectToCart}>Login</a>`;
+
+    var ReactModalPortal_MutationObserver = new MutationObserver(function (
+      mutations
+    ) {
+      mutations
+        .filter((mutation_ReactModalPortal) =>
+          mutation_ReactModalPortal?.target?.className?.includes(
+            "ReactModalPortal"
+          )
+        )
+        .forEach(function (mutation_react_modal_portal) {
+          if (mutation_react_modal_portal.target.childElementCount > 0) {
+            var fnTimeout = setTimeout(
+              changeNavigationLink(
+                mutation_react_modal_portal.target.getElementsByClassName(
+                  "modal-header-link"
+                )?.[0]
+              ),
+              5000
+            );
+            ReactModalPortal_MutationObserver.disconnect();
+          }
+        });
+    });
+
+    const cartLayoutMutation = ({ mutations }) => {
+      mutations
+      .filter(
+        (mutation) =>
+          mutation.target.tagName === 'DIV' && mutation.target?.childNodes?.length > 0 && Array.from(mutation.target.childNodes).filter(cn => cn.className.includes('cartDrawer')) ||
+          mutation?.target?.className?.includes("layout-cart") ||
+          mutation?.target?.className?.includes("cartDrawer")
+      )
+      .forEach(function (mutation) {
+        let showDetailsTag = mutation.target.getElementsByTagName('a');
+        if(showDetailsTag.length > 0) {
+          showDetailsTag = showDetailsTag[showDetailsTag.length -1];
+          if(showDetailsTag.innerText === 'Show Details') {
+            showDetailsTag.innerText = 'Enter promo code / Show details';
+          }
+        }
+
+        if (mutation.target.className?.includes("cartDrawer")) {
+          ReactModalPortal_MutationObserver.observe(
+            document.getElementsByClassName("ReactModalPortal")?.[0],
+            {
+              characterData: true,
+              childList: true,
+              subtree: true,
+            }
+          );
+        } else {
+          var fnTimeout = setTimeout(
+            changeNavigationLink(
+              mutation.target.getElementsByClassName("cart-header-link")?.[0]
+            ),
+            5000
+          );
+        }
+      });
+    }
+
+    const mutationObserver = new MutationObserver(function (mutations) {
+      mutations
+        .filter((mutation) => mutation?.target?.className?.includes("checkout-steps") || mutation?.target?.className?.includes("checkout-view-content"))
+        .forEach(function (mutation) {
+          if(mutation.target.tagName.toLowerCase() === 'ol') {
+            let domCustEle = mutation.target.getElementsByClassName('checkout-step--customer');
+            if(domCustEle?.length > 0) {
+              domCustEle = domCustEle[domCustEle.length - 1];
+              let customerViewctions = domCustEle.getElementsByClassName('customerView-actions');
+              let guestForm = domCustEle.getElementsByClassName('checkout-view-content');
+
+              // if user is logged in
+              if(customerViewctions?.length > 0) {
+                customerViewctions = customerViewctions[customerViewctions.length - 1];
+                customerViewctions.style.display = "none";
+              } else if (guestForm?.length > 0 && !document.getElementById(redeem_login_id)) {
+                // if user is not logged in
+                guestForm = guestForm[guestForm.length - 1];
+                const realGuestForm = document.getElementById('checkout-customer-guest');
+                let continue_button = document.getElementById('checkout-customer-continue');
+                if(continue_button){
+                  continue_button.innerText = 'Continue as guest';
+                }
+                let guestPara = realGuestForm.getElementsByTagName('p');
+                if(guestPara.length > 0) {
+                  guestPara = guestPara[guestPara.length - 1];
+                  guestPara.style.display = "none";
+
+                  redeem_login_div.innerHTML = redeem_login;
+                  realGuestForm.appendChild(redeem_login_div);
+                }
+              }
+            }
+          } else if (mutation.target.className.includes("checkout-view-content") && !CUSTOMER) {
+            let realGuestForm = mutation.target.getElementsByClassName('checkout-form');
+            if(realGuestForm.length > 0) {
+              realGuestForm = realGuestForm[0];
+              let continue_button = document.getElementById('checkout-customer-continue');
+              if(continue_button){
+                continue_button.innerText = 'Continue as guest';
+              }
+              let guestPara = realGuestForm.getElementsByTagName('p');
+              if(guestPara.length > 0  && !document.getElementById(redeem_login_id)) {
+                guestPara = guestPara[guestPara.length - 1];
+                guestPara.style.display = "none";
+
+                redeem_login_div.innerHTML = redeem_login;
+                realGuestForm.appendChild(redeem_login_div);
+              }
+            }
+          }
+        });
+
+        cartLayoutMutation({ mutations });
+    });
+    mutationObserver.observe(document.getElementById("checkout-app"), {
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+  };
+
+  document.onreadystatechange = function () {
+    if (document.readyState === "complete") {
+      var headerLink = document.getElementsByClassName(
+        "checkoutHeader-link"
+      )?.[0];
+      console.log("Elements : ", { headerLink });
+      if (headerLink && headerLink?.href?.includes("sandbox")) {
+        headerLink.href = referer;
+      }
+      createLPMutaionObserver();
+    }
+  };
+</script> -->
