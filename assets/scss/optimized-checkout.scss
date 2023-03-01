@@ -776,6 +776,13 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
 
 .layout-cart,
 .ReactModalPortal {
+  .cart-modal-header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ff7f0f;
+  }
   .cart-priceItem-label > span {
     padding-right: 16px;
   }
@@ -876,6 +883,20 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
       font-family: "Maison Neue";
       font-size: 12px;
       font-weight: 600;
+      border-bottom: 1px solid #000000;
+
+      &::before {
+        content: " ";
+        display: block;
+        background-image: url(../icons/dollar.svg);
+        background-repeat: no-repeat;
+        background-size: 16px;
+        height: 15px;
+        width: 16px;
+        float: left;
+        margin-right: 5px;
+        margin-top: 3px;
+      }
     }
   }
 }
