@@ -4,6 +4,9 @@ cart: true
 {{inject 'cancelButtonText' (lang 'common.cancel')}}
 {{#partial "page"}}
 {{inject 'invalidEntryMessage' (lang 'cart.invalid_entry_message')}}
+<script>
+    window.location.replace("https://staging-site-us.vercel.app/cart");
+</script>
 <div class="page">
 
     <div class="page-content" data-cart>

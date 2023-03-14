@@ -982,20 +982,31 @@ form.checkout-form {
     text-transform: none;
   }
 }
-.paymentProviderHeader-container {
+
+form.checkout-form ul > li:first-child .paymentProviderHeader-container {
   align-items: center;
   .paymentProviderHeader-cc .creditCardTypes-list-item {
     width: 2rem;
     text-align: right;
   }
-  .paymentProviderHeader-img {
-    display: none;
-  }
+
   .paymentProviderHeader-name {
     margin-left: 0px;
   }
   .icon--medium {
     width: 1.8rem;
+  }
+  .paymentProviderHeader-img {
+    display: none;
+  }
+}
+
+form.checkout-form ul > li:nth-child(2) {
+  .form-label.optimizedCheckout-form-label {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 }
 
