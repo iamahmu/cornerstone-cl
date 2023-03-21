@@ -596,6 +596,12 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
   height: 96px;
 }
 
+@media (min-width: 551px) {
+  .checkoutHeader-content {
+    padding: 3rem 1rem;
+  }
+}
+
 #logoImage {
   width: 170px;
 }
@@ -901,40 +907,51 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
 }
 
 .orderConfirmation {
-  padding: 3rem 0;
-  .continueButtonContainer {
-    background-image: url(../img/continue-shopping-BG.jpg);
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    form {
-      height: 75%;
-      margin-top: 4%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      @media (max-width: 968px) {
-        margin-top: 10%;
+  .orderConfirmation-section > p:nth-child(2) {
+    span:first-child {
+      color: transparent;
+      user-select: none;
+      &::before {
+        display: block;
+        color: stencilColor("optimizedCheckout-contentPrimary-color");
+        content: "You will receive a detailed confirmation email shortly.";
       }
     }
-    form::before {
-      content: ".";
-      color: white;
-      display: block;
-      height: 100%;
-      background-image: url(../img/cl-logo-white.png);
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    .optimizedCheckout-buttonSecondary {
-      border: none;
-    }
   }
+  // padding: 3rem 0;
+  // .continueButtonContainer {
+  //   background-image: url(../img/continue-shopping-BG.jpg);
+  //   background-size: cover;
+  //   background-position: center top;
+  //   background-repeat: no-repeat;
+  //   height: 250px;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+
+  //   form {
+  //     height: 75%;
+  //     margin-top: 4%;
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: space-between;
+  //     @media (max-width: 968px) {
+  //       margin-top: 10%;
+  //     }
+  //   }
+  //   form::before {
+  //     content: ".";
+  //     color: white;
+  //     display: block;
+  //     height: 100%;
+  //     background-image: url(../img/cl-logo-white.png);
+  //     background-size: contain;
+  //     background-repeat: no-repeat;
+  //   }
+  //   .optimizedCheckout-buttonSecondary {
+  //     border: none;
+  //   }
+  // }
 }
 
 #checkout-shipping-options {
