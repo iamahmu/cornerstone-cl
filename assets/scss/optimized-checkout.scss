@@ -813,6 +813,16 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
   }
 }
 
+.redeemable-label {
+  font-size: 0px;
+  color: stencilColor("optimizedCheckout-orderSummary-backgroundColor");
+  &::before {
+    content: "Coupon Code";
+    font-size: 14px;
+    color: stencilColor("optimizedCheckout-contentPrimary-color");
+  }
+}
+
 #redeemable-collapsable {
   .optimizedCheckout-form-input {
     border-right-width: 0px;
