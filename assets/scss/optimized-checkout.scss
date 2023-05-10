@@ -140,12 +140,26 @@
   // TODO:
   // Configure media query to be 'desktop' breakpoint size
   // -----------------------------------------------------------------------------
-  @media (min-width: 801px) {
+  @media (max-width: 819px) {
     text-align: stencilString("optimizedCheckout-logo-position");
-  }
-  @media (max-width: 801px) {
+    min-height: 0rem;
+    border-bottom: 1px solid;
+
+    .checkoutHeader {
+      min-height: 0rem;
+    }
+    .checkoutHeader-content {
+      padding: 2rem 1rem;
+    }
     .checkoutHeader-content-right {
       visibility: hidden;
+      display: none;
+    }
+  }
+  @media (min-width: 820px) {
+    min-height: unset;
+    .checkoutHeader-content {
+      padding: 2rem 1rem;
     }
   }
 }
@@ -592,13 +606,28 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
     padding-top: 1rem;
   }
 }
-.checkoutHeader {
-  height: 96px;
+// .checkoutHeader {
+//   height: 96px;
+// }
+
+.back-for-mobile {
+  display: none;
 }
 
-@media (min-width: 551px) {
+@media (max-width: 819px) {
   .checkoutHeader-content {
-    padding: 3rem 1rem;
+    // TODO: Header Logo to align left
+    // display: flex;
+    justify-content: space-between;
+  }
+  .back-for-mobile {
+    display: flex;
+    flex-grow: 0.98;
+    align-items: center;
+    a {
+      padding: 0 10px 0 3px;
+      margin-top: 10px;
+    }
   }
 }
 
@@ -1010,32 +1039,61 @@ form.checkout-form {
   }
 }
 
-form.checkout-form ul > li:first-child .paymentProviderHeader-container {
-  align-items: center;
-  .paymentProviderHeader-cc .creditCardTypes-list-item {
-    width: 2rem;
-    text-align: right;
-  }
+// Initial style when we were having 1 payment method
+// form.checkout-form ul > li:first-child .paymentProviderHeader-container {
+//   align-items: center;
+//   .paymentProviderHeader-cc .creditCardTypes-list-item {
+//     width: 2rem;
+//     text-align: right;
+//   }
 
-  .paymentProviderHeader-name {
-    margin-left: 0px;
-  }
-  .icon--medium {
-    width: 1.8rem;
-  }
-  .paymentProviderHeader-img {
-    display: none;
-  }
-}
+//   .paymentProviderHeader-name {
+//     margin-left: 0px;
+//   }
+//   .icon--medium {
+//     width: 1.8rem;
+//   }
+//   .paymentProviderHeader-img {
+//     display: none;
+//   }
+// }
 
-form.checkout-form ul > li:nth-child(2) {
-  .form-label.optimizedCheckout-form-label {
-    min-height: 60px;
-    display: flex;
+form.checkout-form {
+  .form-checklist-checkbox ~ .form-label {
+    padding: 1rem 1rem 1rem 3.5rem;
+  }
+  ul > li .paymentProviderHeader-container {
+    width: 100%;
+    min-height: 3rem;
     align-items: center;
-    justify-content: flex-end;
+
+    .paymentProviderHeader-nameContainer > img.paymentProviderHeader-img {
+      height: 1.5rem;
+    }
+
+    .paymentProviderHeader-cc .creditCardTypes-list-item {
+      width: 2rem;
+      text-align: right;
+    }
+    .icon--medium {
+      width: 2rem;
+    }
+    .paymentProviderHeader-name {
+      align-self: center;
+      font-size: 14px;
+    }
   }
 }
+
+// Initial style when we were having 1 payment method
+// form.checkout-form ul > li:nth-child(2) {
+//   .form-label.optimizedCheckout-form-label {
+//     min-height: 60px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-end;
+//   }
+// }
 
 .ReactModalPortal {
   @media (max-width: 550px) {
