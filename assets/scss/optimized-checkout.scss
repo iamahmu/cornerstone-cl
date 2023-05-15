@@ -1083,6 +1083,15 @@ form.checkout-form {
       font-size: 14px;
     }
   }
+  .form-checklist.optimizedCheckout-form-checklist {
+    background-color: coral;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-checklist-item.optimizedCheckout-form-checklist-item {
+    order: 10;
+  }
 }
 
 // Initial style when we were having 1 payment method

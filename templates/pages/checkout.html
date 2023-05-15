@@ -61,70 +61,72 @@
 layout/empty}}
 
 <!-- <script>
-    const BC_SETTINGS = {{{ json settings }}};
-    const CUSTOMER = {{{ json customer}}};
+  const BC_SETTINGS = {{{ json settings }}};
+  const CUSTOMER = {{{ json customer}}};
 
-    const redeem_login_id = 'redeem-login';
-    const {
-      request : {
-        referer
-      }
-    } = BC_SETTINGS;
-    const redirectToCart = `${referer}cart`
+  const redeem_login_id = "redeem-login";
+  const {
+    request: { referer },
+  } = BC_SETTINGS;
+  const redirectToCart = `${referer}cart`;
 
-    const changeNavigationLink = (target) => {
-      if (target && target?.href?.includes("sandbox")) {
-        	// target.href = redirectToCart;
-          target.href = `javascript:location.replace('${redirectToCart}')`;
-  		// target.href = `javascript:window.history.back();`;
-      }
-    };
+  const changeNavigationLink = (target) => {
+    if (target && target?.href?.includes("sandbox")) {
+      // target.href = redirectToCart;
+      target.href = `javascript:location.replace('${redirectToCart}')`;
+      // target.href = `javascript:window.history.back();`;
+    }
+  };
 
-    const createLPMutaionObserver = () => {
-      console.log('CUSTOMER LP Script');
+  const createLPMutaionObserver = () => {
+    console.log("%cMutaion Observer Script - initialized", "color:green");
 
-      const redeem_login_div = document.createElement('div');
-      redeem_login_div.id = 'redeem-login-div';
-      let redeem_login = `<p id=${redeem_login_id}>To redeem your loyalty points </p> <a data-test="customer-continue-button" id="checkout-customer-login" class="button optimizedCheckout-buttonSecondary" href=${redirectToCart}?login=true replace>Login</a>`;
+    const redeem_login_div = document.createElement("div");
+    redeem_login_div.id = "redeem-login-div";
+    let redeem_login = `<p id=${redeem_login_id}>To redeem your loyalty points </p> <a data-test="customer-continue-button" id="checkout-customer-login" class="button optimizedCheckout-buttonSecondary" href=${redirectToCart}?login=true replace>Login</a>`;
 
-      var ReactModalPortal_MutationObserver = new MutationObserver(function (
-        mutations
-      ) {
-        mutations
-          .filter((mutation_ReactModalPortal) =>
-            mutation_ReactModalPortal?.target?.className?.includes(
-              "ReactModalPortal"
-            )
+    var ReactModalPortal_MutationObserver = new MutationObserver(function (
+      mutations
+    ) {
+      mutations
+        .filter((mutation_ReactModalPortal) =>
+          mutation_ReactModalPortal?.target?.className?.includes(
+            "ReactModalPortal"
           )
-          .forEach(function (mutation_react_modal_portal) {
-            if (mutation_react_modal_portal.target.childElementCount > 0) {
-              var fnTimeout = setTimeout(
-                changeNavigationLink(
-                  mutation_react_modal_portal.target.getElementsByClassName(
-                    "modal-header-link"
-                  )?.[0]
-                ),
-                5000
-              );
-              ReactModalPortal_MutationObserver.disconnect();
-            }
-          });
-      });
+        )
+        .forEach(function (mutation_react_modal_portal) {
+          if (mutation_react_modal_portal.target.childElementCount > 0) {
+            var fnTimeout = setTimeout(
+              changeNavigationLink(
+                mutation_react_modal_portal.target.getElementsByClassName(
+                  "modal-header-link"
+                )?.[0]
+              ),
+              5000
+            );
+            ReactModalPortal_MutationObserver.disconnect();
+          }
+        });
+    });
 
-      const cartLayoutMutation = ({ mutations }) => {
-        mutations
+    const cartLayoutMutation = ({ mutations }) => {
+      mutations
         .filter(
           (mutation) =>
-            mutation.target.tagName === 'DIV' && mutation.target?.childNodes?.length > 0 && Array.from(mutation.target.childNodes).filter(cn => cn?.className?.includes && cn?.className?.includes('cartDrawer')) ||
+            (mutation.target.tagName === "DIV" && mutation.target?.childNodes?.length > 0 && Array.from(mutation.target.childNodes).filter(
+              (cn) =>
+                cn?.className?.includes &&
+                cn?.className?.includes("cartDrawer"))
+            ) ||
             mutation?.target?.className?.includes?.("layout-cart") ||
             mutation?.target?.className?.includes?.("cartDrawer")
         )
         .forEach(function (mutation) {
-          let showDetailsTag = mutation.target.getElementsByTagName('a');
-          if(showDetailsTag.length > 0) {
-            showDetailsTag = showDetailsTag[showDetailsTag.length -1];
-            if(showDetailsTag.innerText === 'Show Details') {
-              showDetailsTag.innerText = 'Enter promo code / Show details';
+          let showDetailsTag = mutation.target.getElementsByTagName("a");
+          if (showDetailsTag.length > 0) {
+            showDetailsTag = showDetailsTag[showDetailsTag.length - 1];
+            if (showDetailsTag.innerText === "Show Details") {
+              showDetailsTag.innerText = "Enter promo code / Show details";
             }
           }
 
@@ -146,55 +148,58 @@ layout/empty}}
             );
           }
         });
-      }
+    };
 
-      const mutationObserver = new MutationObserver(function (mutations) {
-        mutations
-          .filter((mutation) => mutation?.target?.className?.includes && (mutation?.target?.className?.includes("checkout-steps") || mutation?.target?.className?.includes("checkout-view-content") || mutation?.target?.className?.includes("form-checklist")))
-          .forEach(function (mutation) {
-            if(mutation?.target?.className?.includes('checkout-view-content-enter-done') && document.getElementsByClassName('ulList-reorderd').length === 0) {
-              reorderPaymentMethodList();
-            }
-            if(mutation.target.tagName.toLowerCase() === 'ol') {
-              let domCustEle = mutation.target.getElementsByClassName('checkout-step--customer');
+    const mutationObserver = new MutationObserver(function (mutations) {
+      mutations
+        .filter(
+          (mutation) =>
+            mutation?.target?.className?.includes &&
+            (mutation?.target?.className?.includes("checkout-steps") ||
+              mutation?.target?.className?.includes("checkout-view-content") ||
+              mutation?.target?.className?.includes("form-checklist"))
+        )
+        .forEach(function (mutation) {
+          if ( mutation?.target?.className?.includes("checkout-view-content-enter-done") && document.getElementsByClassName("ulList-reorderd").length === 0) {
+            reorderPaymentMethodList();
+          }
 
-              if(domCustEle?.length > 0) {
-                domCustEle = domCustEle[domCustEle.length - 1];
-                let customerViewctions = domCustEle.getElementsByClassName('customerView-actions');
-                let guestForm = domCustEle.getElementsByClassName('checkout-view-content');
+          if (mutation.target.tagName.toLowerCase() === "ol") {
+            let domCustEle = mutation.target.getElementsByClassName(
+              "checkout-step--customer"
+            );
 
-                // if user is logged in
-                if(customerViewctions?.length > 0) {
-                  customerViewctions = customerViewctions[customerViewctions.length - 1];
-                  customerViewctions.style.display = "none";
-                } else if (guestForm?.length > 0 && !document.getElementById(redeem_login_id)) {
-                  // if user is not logged in
-                  guestForm = guestForm[guestForm.length - 1];
-                  const realGuestForm = document.getElementById('checkout-customer-guest');
-                  let continue_button = document.getElementById('checkout-customer-continue');
-                  if(continue_button){
-                    continue_button.innerText = 'Continue as guest';
-                  }
-                  let guestPara = realGuestForm.getElementsByTagName('p');
-                  if(guestPara.length > 0) {
-                    guestPara = guestPara[guestPara.length - 1];
-                    guestPara.style.display = "none";
+            if (domCustEle?.length > 0) {
+              domCustEle = domCustEle[domCustEle.length - 1];
+              let customerViewctions = domCustEle.getElementsByClassName(
+                "customerView-actions"
+              );
+              let guestForm = domCustEle.getElementsByClassName(
+                "checkout-view-content"
+              );
 
-                    redeem_login_div.innerHTML = redeem_login;
-                    realGuestForm.appendChild(redeem_login_div);
-                  }
+              // if user is logged in
+              if (customerViewctions?.length > 0) {
+                customerViewctions =
+                  customerViewctions[customerViewctions.length - 1];
+                customerViewctions.style.display = "none";
+              } else if (
+                guestForm?.length > 0 &&
+                !document.getElementById(redeem_login_id)
+              ) {
+                // if user is not logged in
+                guestForm = guestForm[guestForm.length - 1];
+                const realGuestForm = document.getElementById(
+                  "checkout-customer-guest"
+                );
+                let continue_button = document.getElementById(
+                  "checkout-customer-continue"
+                );
+                if (continue_button) {
+                  continue_button.innerText = "Continue as guest";
                 }
-              }
-            } else if (mutation.target.className.includes("checkout-view-content") && !CUSTOMER) {
-              let realGuestForm = mutation.target.getElementsByClassName('checkout-form');
-              if(realGuestForm.length > 0) {
-                realGuestForm = realGuestForm[0];
-                let continue_button = document.getElementById('checkout-customer-continue');
-                if(continue_button){
-                  continue_button.innerText = 'Continue as guest';
-                }
-                let guestPara = realGuestForm.getElementsByTagName('p');
-                if(guestPara.length > 0  && !document.getElementById(redeem_login_id)) {
+                let guestPara = realGuestForm.getElementsByTagName("p");
+                if (guestPara.length > 0) {
                   guestPara = guestPara[guestPara.length - 1];
                   guestPara.style.display = "none";
 
@@ -203,63 +208,86 @@ layout/empty}}
                 }
               }
             }
-          });
+          } else if (mutation.target.className.includes("checkout-view-content") && !CUSTOMER) {
+            let realGuestForm =
+              mutation.target.getElementsByClassName("checkout-form");
+            if (realGuestForm.length > 0) {
+              realGuestForm = realGuestForm[0];
+              let continue_button = document.getElementById(
+                "checkout-customer-continue"
+              );
+              if (continue_button) {
+                continue_button.innerText = "Continue as guest";
+              }
+              let guestPara = realGuestForm.getElementsByTagName("p");
+              if (
+                guestPara.length > 0 &&
+                !document.getElementById(redeem_login_id)
+              ) {
+                guestPara = guestPara[guestPara.length - 1];
+                guestPara.style.display = "none";
 
-          cartLayoutMutation({ mutations });
+                redeem_login_div.innerHTML = redeem_login;
+                realGuestForm.appendChild(redeem_login_div);
+              }
+            }
+          }
+        });
+
+      cartLayoutMutation({ mutations });
+    });
+    window.requestAnimationFrame(() => {
+      mutationObserver.observe(document, {
+        // attributes: true,
+        childList: true,
+        subtree: true,
       });
-     window.requestAnimationFrame(() => {
-          mutationObserver.observe(document, {
-            // attributes: true,
-            childList: true,
-            subtree: true,
-          });
-     });
+    });
   };
   const changeHeaderLink = () => {
-      var headerLink = document.getElementsByClassName("checkoutHeader-link")?.[0];
-      console.log("Elements : ", { headerLink });
-      if (headerLink && headerLink?.href?.includes("sandbox")) {
-          headerLink.href = referer;
-      }
-  }
-  document.onreadystatechange = function () {
-      if (document.readyState === "complete") {
-          changeHeaderLink();
-      }
+    var headerLink = document.getElementsByClassName(
+      "checkoutHeader-link"
+    )?.[0];
+    if (headerLink && headerLink?.href?.includes("sandbox")) {
+      headerLink.href = referer;
+    }
   };
+  document.onreadystatechange = function () {
+    if (document.readyState === "complete") {
+      changeHeaderLink();
+    }
+  };
+
+  const reorderPaymentMethodList = () => {
+    const inputIds = [
+      "radio-adyenv3-scheme",
+      "applepay",
+      "radio-paypalcommerce",
+      "radio-paypalcommercecredit",
+    ];
+    const paymentListClass = ".form-checklist.optimizedCheckout-form-checklist";
+    const paymentList = document.querySelector(paymentListClass);
+    if (paymentList) {
+      paymentList.classList.add("ulList-reorderd");
+
+      const paymentItemList = Array.from(paymentList.children);
+      paymentItemList.forEach((paymentItem) => {
+        const paymentItemId = paymentItem.querySelector("input")?.id;
+        if (paymentItemId) {
+          const indexOfItem = inputIds.indexOf(
+            paymentItem.querySelector("input").id
+          );
+          if (indexOfItem >= 0) {
+            paymentItem.style.order = indexOfItem;
+            if (indexOfItem === 0) {
+              paymentItem.style.borderBottom = "inherit";
+            }
+          }
+        }
+      });
+    }
+  };
+
   changeHeaderLink();
   createLPMutaionObserver();
-</script> -->
-
-<!-- <script>
-  var inputIds = [
-    "radio-adyenv3-scheme",
-    "applepay",
-    "radio-paypalcommerce",
-    "radio-paypalcommercecredit",
-  ];
-  function reorderPaymentMethodList() {
-    console.log("reorder");
-    const ulList = document.getElementsByClassName(
-      "form-checklist optimizedCheckout-form-checklist"
-    )[0];
-    ulList.className += " ulList-reorderd";
-    const listItems = Array.from(ulList.children);
-    inputIds
-      .map((a) => {
-        return (
-          listItems.find((b) => b.getElementsByTagName("input")[0].id === a) ||
-          null
-        );
-      })
-      .forEach((optn) => {
-        if (optn) ulList.appendChild(optn);
-      });
-    setTimeout(() => {
-      const adynBtn = document.getElementById(inputIds[0]);
-      if (adynBtn) {
-        adynBtn.click();
-      }
-    }, 500);
-  }
 </script> -->
