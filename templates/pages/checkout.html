@@ -60,9 +60,9 @@
 {{{ checkout.checkout_content }}} {{{ footer.scripts }}} {{/partial}} {{>
 layout/empty}}
 
-<!-- <script>
+<script>
   const BC_SETTINGS = {{{ json settings }}};
-  const CUSTOMER = {{{ json customer}}};
+  const CUSTOMER = {{{ json customer }}};
 
   const redeem_login_id = "redeem-login";
   const {
@@ -168,45 +168,44 @@ layout/empty}}
             let domCustEle = mutation.target.getElementsByClassName(
               "checkout-step--customer"
             );
-
             if (domCustEle?.length > 0) {
               domCustEle = domCustEle[domCustEle.length - 1];
               let customerViewctions = domCustEle.getElementsByClassName(
                 "customerView-actions"
               );
-              let guestForm = domCustEle.getElementsByClassName(
-                "checkout-view-content"
-              );
-
+              // let guestForm = domCustEle.getElementsByClassName(
+              //   "checkout-view-content"
+              // );
               // if user is logged in
               if (customerViewctions?.length > 0) {
                 customerViewctions =
                   customerViewctions[customerViewctions.length - 1];
                 customerViewctions.style.display = "none";
-              } else if (
-                guestForm?.length > 0 &&
-                !document.getElementById(redeem_login_id)
-              ) {
-                // if user is not logged in
-                guestForm = guestForm[guestForm.length - 1];
-                const realGuestForm = document.getElementById(
-                  "checkout-customer-guest"
-                );
-                let continue_button = document.getElementById(
-                  "checkout-customer-continue"
-                );
-                if (continue_button) {
-                  continue_button.innerText = "Continue as guest";
-                }
-                let guestPara = realGuestForm.getElementsByTagName("p");
-                if (guestPara.length > 0) {
-                  guestPara = guestPara[guestPara.length - 1];
-                  guestPara.style.display = "none";
-
-                  redeem_login_div.innerHTML = redeem_login;
-                  realGuestForm.appendChild(redeem_login_div);
-                }
               }
+              // else if (
+              //   guestForm?.length > 0 &&
+              //   !document.getElementById(redeem_login_id)
+              // ) {
+              //   // if user is not logged in
+              //   guestForm = guestForm[guestForm.length - 1];
+              //   const realGuestForm = document.getElementById(
+              //     "checkout-customer-guest"
+              //   );
+              //   let continue_button = document.getElementById(
+              //     "checkout-customer-continue"
+              //   );
+              //   if (continue_button) {
+              //     continue_button.innerText = "Continue as guest";
+              //   }
+              //   let guestPara = realGuestForm.getElementsByTagName("p");
+              //   if (guestPara.length > 0) {
+              //     guestPara = guestPara[guestPara.length - 1];
+              //     guestPara.style.display = "none";
+
+              //     redeem_login_div.innerHTML = redeem_login;
+              //     realGuestForm.appendChild(redeem_login_div);
+              //   }
+              // }
             }
           } else if (mutation.target.className.includes("checkout-view-content") && !CUSTOMER) {
             let realGuestForm =
@@ -220,13 +219,16 @@ layout/empty}}
                 continue_button.innerText = "Continue as guest";
               }
               let guestPara = realGuestForm.getElementsByTagName("p");
-              if (
-                guestPara.length > 0 &&
-                !document.getElementById(redeem_login_id)
-              ) {
-                guestPara = guestPara[guestPara.length - 1];
-                guestPara.style.display = "none";
+              let customerEmailContainer = realGuestForm.getElementsByClassName('customerEmail-container')?.[0];
+              if(customerEmailContainer) {
+                let nextSibling = customerEmailContainer.nextElementSibling;
 
+                while(nextSibling) {
+                  nextSibling.style.display = "none";
+                  nextSibling = nextSibling.nextElementSibling;
+                }
+              }
+              if (guestPara.length > 0 && !document.getElementById(redeem_login_id)) {
                 redeem_login_div.innerHTML = redeem_login;
                 realGuestForm.appendChild(redeem_login_div);
               }
@@ -238,7 +240,8 @@ layout/empty}}
     });
     window.requestAnimationFrame(() => {
       mutationObserver.observe(document, {
-        // attributes: true,
+        // characterData: true,
+        attributes: true,
         childList: true,
         subtree: true,
       });
@@ -290,4 +293,4 @@ layout/empty}}
 
   changeHeaderLink();
   createLPMutaionObserver();
-</script> -->
+</script>
