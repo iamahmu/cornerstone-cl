@@ -1130,10 +1130,19 @@ form.checkout-form {
   }
 }
 
-div[data-test="cart-coupon"] {
+div[data-test="cart-coupon"],
+div[data-test="cart-store-credit"] {
   .cart-priceItem-label,
   .cart-priceItem-value,
   .cart-priceItem-postFix {
     color: #ff7f0f;
+  }
+}
+
+// hide store credit checkbox for apply/remove store credit
+input[id="useStoreCredit"] {
+  display: none;
+  + label {
+    display: none !important;
   }
 }
