@@ -1139,6 +1139,20 @@ div[data-test="cart-store-credit"] {
   }
 }
 
+div[data-test="cart-store-credit"] {
+  .cart-priceItem-label > span {
+    color: transparent;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    &::before {
+      content: "Loyalty Discount";
+      color: #ff7f0f;
+    }
+  }
+}
+
 // hide store credit checkbox for apply/remove store credit
 input[id="useStoreCredit"] {
   display: none;
