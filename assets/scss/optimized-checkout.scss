@@ -638,6 +638,7 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
 .layout.optimizedCheckout-contentPrimary {
   padding: 0px;
   display: flex;
+  align-items: center;
   & > div:first-child:not([class]) {
     display: flex;
     flex: 1;
@@ -649,6 +650,7 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
     flex-direction: column-reverse;
     .cartDrawer.optimizedCheckout-orderSummary {
       position: sticky;
+      width: 100%;
       margin: 0px;
       top: 0px;
     }
@@ -752,7 +754,8 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
   }
 
   .cart {
-    margin: 1.5rem 0 1.5rem;
+    margin: 1.5rem 15px 1.5rem;
+    padding: 10px 24px;
   }
 
   .cart-section {
@@ -946,14 +949,21 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
 }
 
 .orderConfirmation {
-  .orderConfirmation-section > p:nth-child(2) {
+  .orderConfirmation-section
+    > p[data-test="order-confirmation-order-status-text"] {
     span:first-child {
       color: transparent;
       user-select: none;
+      font-size: 0.1px;
       &::before {
+        font-size: 1rem;
         display: block;
         color: stencilColor("optimizedCheckout-contentPrimary-color");
         content: "You will receive a detailed confirmation email shortly.";
+      }
+      > a {
+        display: block;
+        font-size: 1rem;
       }
     }
   }
