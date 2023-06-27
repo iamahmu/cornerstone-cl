@@ -948,59 +948,40 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
   }
 }
 
-.orderConfirmation {
-  .orderConfirmation-section
-    > p[data-test="order-confirmation-order-status-text"] {
+.orderConfirmation .orderConfirmation-section {
+  @media (min-width: 550px) {
+    padding: 0px 1rem 1rem 0rem;
+  }
+  > p[data-test="order-confirmation-order-number-text"] {
+    margin-bottom: unset;
+    span:first-child {
+      &::after {
+        font-size: 1rem;
+        color: stencilColor("optimizedCheckout-contentPrimary-color");
+        content: ". You should receive a detailed confirmation email shortly";
+      }
+    }
+  }
+  > p[data-test="order-confirmation-order-status-text"] {
     span:first-child {
       color: transparent;
       user-select: none;
       font-size: 0.1px;
-      &::before {
-        font-size: 1rem;
-        display: block;
-        color: stencilColor("optimizedCheckout-contentPrimary-color");
-        content: "You will receive a detailed confirmation email shortly.";
-      }
       > a {
         display: block;
         font-size: 1rem;
+        color: #0052cc;
+        &::before {
+          color: stencilColor("optimizedCheckout-contentPrimary-color");
+          content: "Once your package ships we will send an email with a link to track your order. You can check the status of your order by logging into your account. If you have any questions about your order please contact us at ";
+        }
+        &::after {
+          color: stencilColor("optimizedCheckout-contentPrimary-color");
+          content: " or call us at 1-800-272-7078, 7 days a week from 6am to 10pm EST.";
+        }
       }
     }
   }
-  // padding: 3rem 0;
-  // .continueButtonContainer {
-  //   background-image: url(../img/continue-shopping-BG.jpg);
-  //   background-size: cover;
-  //   background-position: center top;
-  //   background-repeat: no-repeat;
-  //   height: 250px;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-
-  //   form {
-  //     height: 75%;
-  //     margin-top: 4%;
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: space-between;
-  //     @media (max-width: 968px) {
-  //       margin-top: 10%;
-  //     }
-  //   }
-  //   form::before {
-  //     content: ".";
-  //     color: white;
-  //     display: block;
-  //     height: 100%;
-  //     background-image: url(../img/cl-logo-white.png);
-  //     background-size: contain;
-  //     background-repeat: no-repeat;
-  //   }
-  //   .optimizedCheckout-buttonSecondary {
-  //     border: none;
-  //   }
-  // }
 }
 
 #checkout-shipping-options {
