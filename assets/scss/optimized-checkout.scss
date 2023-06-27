@@ -962,24 +962,31 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px
       }
     }
   }
-  > p[data-test="order-confirmation-order-status-text"] {
+  p[data-test="order-confirmation-order-status-text"] {
     span:first-child {
       color: transparent;
       user-select: none;
       font-size: 0.1px;
-      > a {
+      &::before {
         display: block;
+        margin-top: 1rem;
         font-size: 1rem;
-        color: #0052cc;
-        &::before {
-          color: stencilColor("optimizedCheckout-contentPrimary-color");
-          content: "Once your package ships we will send an email with a link to track your order. You can check the status of your order by logging into your account. If you have any questions about your order please contact us at ";
-        }
-        &::after {
-          color: stencilColor("optimizedCheckout-contentPrimary-color");
-          content: " or call us at 1-800-272-7078, 7 days a week from 6am to 10pm EST.";
-        }
+        color: stencilColor("optimizedCheckout-contentPrimary-color");
+        content: "Once your package ships we will send an email with a link to track your order. You can check the status of your order by logging into your account. If you have any questions about your order please contact us at chantelle.care@groupechantelle.com  or call us at 1-800-272-7078, 7 days a week from 6am to 10pm EST.";
       }
+      // > a {
+      //   display: block;
+      //   font-size: 1rem;
+      //   color: #0052cc;
+      //   &::before {
+      //     color: stencilColor("optimizedCheckout-contentPrimary-color");
+      //     content: "Once your package ships we will send an email with a link to track your order. You can check the status of your order by logging into your account. If you have any questions about your order please contact us at ";
+      //   }
+      //   &::after {
+      //     color: stencilColor("optimizedCheckout-contentPrimary-color");
+      //     content: " or call us at 1-800-272-7078, 7 days a week from 6am to 10pm EST.";
+      //   }
+      // }
     }
   }
 }
